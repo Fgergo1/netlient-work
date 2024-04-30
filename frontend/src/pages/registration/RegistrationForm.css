@@ -1,0 +1,24 @@
+
+
+.wrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items:  center;
+}
+
+
+.container  {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    flex-direction: column;
+    height: 400px;
+    width : 400px
+}
+
+
+
+.btn  {
+    margin-top : 20px;
+}
