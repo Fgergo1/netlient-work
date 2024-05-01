@@ -32,13 +32,15 @@ function TableForm({products, onSort, onFilter, saveTable}: tableDataInterface) 
 
 
             if (inputValue !== "") {
-                const filter: Filter = {
-                    field: field,
-                    operator: operator,
-                    value: inputValue
+                if (typeof inputValue === "string") {
+                    const filter: Filter = {
+                        field: field,
+                        operator: operator,
+                        value: !isNaN(parseFloat(inputValue)) ? parseFloat(inputValue) : inputValue
+                    }
+                    filters.push(filter)
                 }
-                console.log(filter)
-                filters.push(filter)
+
             }
         })
         onFilter(filters)
