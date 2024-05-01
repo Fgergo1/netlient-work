@@ -20,15 +20,19 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public ResponseEntity<List<ProductDTO>> getProducts () {
+    public ResponseEntity<List<ProductDTO>> getProducts() {
         List<ProductDTO> productDTOList = productService.getProductsFromDataBase();
+
+        if (productDTOList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
         return ResponseEntity.ok(productDTOList);
     }
 
     @PostMapping("/products/order")
-    public ResponseEntity<?> sortByParamValue (@RequestParam("sort") String sortBy, @RequestBody Boolean isSortedByAscend) {
+    public ResponseEntity<?> sortByParamValue(@RequestParam("sort") String sortBy, @RequestBody Boolean isSortedByAscend) {
 
-        List<ProductDTO> productDTOList = productService.getOrderedProductsFromDataBase(sortBy,isSortedByAscend);
+        List<ProductDTO> productDTOList = productService.getOrderedProductsFromDataBase(sortBy, isSortedByAscend);
 
         if (!productDTOList.isEmpty()) {
             return ResponseEntity.ok(productDTOList);
@@ -42,6 +46,6 @@ public class ProductController {
         List<ProductDTO> products = productService.getFilteredProductsFromDataBase(filterDTO);
         System.out.println(products);
 
-        return  ResponseEntity.ok(products);
+        return ResponseEntity.ok(products);
     }
 }

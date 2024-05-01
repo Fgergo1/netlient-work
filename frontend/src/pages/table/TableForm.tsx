@@ -17,24 +17,19 @@ function TableForm({products, onSort, onFilter, saveTable}: tableDataInterface) 
 
         const form = event.currentTarget
         const filters: Filter[] = []
-        const inputDivs = form.querySelectorAll(".input-div")
 
-        inputDivs.forEach((elements) => {
-            const childElements = elements.querySelectorAll("*");
-            let field: string = ""
-            let operator: string = ""
-            let inputValue: string | number = ""
-            childElements.forEach((element) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        const selectElements = form.elements["select-element"]
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        const inputElements = form.elements["form-input"]
 
-                if (element.tagName === "LABEL") {
-                    field = (element as HTMLLabelElement).id
-                } else if (element.tagName === "SELECT") {
-                    operator = (element as HTMLSelectElement).value
-                } else if (element.tagName === "INPUT") {
-                    const value = (element as HTMLInputElement).value
-                    inputValue = !isNaN(parseFloat(value)) ? parseFloat(value) : value;
-                }
-            })
+        selectElements.forEach((select : HTMLSelectElement, index : number) => {
+            const field: string = inputElements[index].name
+            const operator: string = select.value
+            const inputValue: string | number = inputElements[index].value
+
 
             if (inputValue !== "") {
                 const filter: Filter = {
@@ -42,6 +37,7 @@ function TableForm({products, onSort, onFilter, saveTable}: tableDataInterface) 
                     operator: operator,
                     value: inputValue
                 }
+                console.log(filter)
                 filters.push(filter)
             }
         })
@@ -55,8 +51,8 @@ function TableForm({products, onSort, onFilter, saveTable}: tableDataInterface) 
                 <thead>
                 <tr>
                     {products[0] && Object.keys(products[0]).map((key) => (
-                        <th className="table-header-elements" key={key} onClick={() => onSort(key as keyof Product)}>
-                            {key}
+                        <th className="table-header-element" key={key} onClick={() => onSort(key as keyof Product)}>
+                            {key + "  ⇅"}
                         </th>
                     ))}
                 </tr>
@@ -75,38 +71,39 @@ function TableForm({products, onSort, onFilter, saveTable}: tableDataInterface) 
             <div className="form-wrapper">
                 <form className="input-group" onSubmit={handleSubmit}>
                     <div className="input-div">
-                        <label id="articleNumber" className="input-label " htmlFor="article-number">Article
-                            number</label>
-                        <select defaultValue="Exact" className="select-element">
+                        <label>Article
+                            number
+                        </label>
+                        <select defaultValue="Exact" id="select-element" className="form-select">
                             <option>Exact</option>
                         </select>
-                        <input type="number" name="article-number form-input " className="value-input"></input>
+                        <input  id="form-input" type="number" name="articleNumber"  className="value-input form-control"></input>
                     </div>
                     <div className="input-div">
-                        <label id="name" htmlFor="product-name">Product name</label>
-                        <select defaultValue="Partial">
+                        <label>Product name</label>
+                        <select defaultValue="Partial" id="select-element" className="form-select">
                             <option>Partial</option>
                             <option>Exact</option>
                         </select>
-                        <input name="product-name" className="value-input"></input>
+                        <input id="form-input" name="name" className="value-input form-control"></input>
                     </div>
                     <div className="input-div">
-                        <label id="netCost" htmlFor="net-cost">Net cost</label>
-                        <select defaultValue="Equal">
+                        <label>Net cost</label>
+                        <select defaultValue="Equal" id="select-element" className="form-select">
                             <option>Equal</option>
                             <option>Higher</option>
                             <option>Lower</option>
                         </select>
-                        <input type="number" name="net-cost" className="value-input"></input>
+                        <input id="form-input" type="number" name="netCost" className="value-input form-control"></input>
                     </div>
                     <div className="input-div">
-                        <label id="VAT" htmlFor="vat-number">Vat number</label>
-                        <select defaultValue="Equal">
+                        <label>Vat number</label>
+                        <select defaultValue="Equal" id="select-element" className="form-select">
                             <option>Equal</option>
                             <option>Higher</option>
                             <option>Lower</option>
                         </select>
-                        <input type="number" name="vat-number" className="value-input"></input>
+                        <input id="form-input" type="number" name="VAT" className="value-input form-control"></input>
                     </div>
                     <button className="btn btn-primary" type="submit">Search</button>
                     <div className="pdf-button-container ">

@@ -14,16 +14,8 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public boolean registerUserToDataBase (UserDTO user) {
-        UserEntity userEntity = new UserEntity(user.getUserName(), user.getPassword());
-        if (!userRepository.existsByUserName(user.getUserName())) {
-            userRepository.save(userEntity);
-            return true;
-        }
-        return false;
-    }
 
-    public boolean CheckUserIsInTheDataBase (UserDTO user) {
+    public boolean CheckUserIsInTheDataBase(UserDTO user) {
         return userRepository.existsByUserName(user.getUserName());
     }
 }

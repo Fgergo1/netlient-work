@@ -1,10 +1,19 @@
 import LoginForm from "./LoginForm.tsx";
 import {User} from "../../types/types.ts";
 import {useNavigate} from "react-router-dom";
+import {useState} from "react";
 
 
 function LoginPage () {
+    const [error, setError] = useState<boolean>(false)
     const navigate = useNavigate()
+
+    function handlePopupError () {
+        setError(true)
+        setTimeout(() => {
+            setError(false)
+        }, 5000)
+    }
 
 
    async function loginUser (user : User) {
@@ -19,7 +28,7 @@ function LoginPage () {
         if (response.status === 200) {
             navigate("/table")
         } else {
-            console.log("username or password incorrect!")
+           handlePopupError()
         }
     }
 
@@ -27,7 +36,7 @@ function LoginPage () {
 
 
     return (
-        <LoginForm onLogin={loginUser}/>
+        <LoginForm error={error} onLogin={loginUser}/>
     )
 }
 

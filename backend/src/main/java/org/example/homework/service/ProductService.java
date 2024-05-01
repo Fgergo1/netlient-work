@@ -13,14 +13,14 @@ import java.util.List;
 @Service
 public class ProductService {
 
-   private final ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
 
-    public List<ProductDTO> getProductsFromDataBase () {
+    public List<ProductDTO> getProductsFromDataBase() {
 
         return productRepository.findAll().stream()
                 .map((product) -> new ProductDTO(
@@ -30,7 +30,7 @@ public class ProductService {
                         product.getVAT())).toList();
     }
 
-    public List<ProductDTO> getOrderedProductsFromDataBase (String sortBy, Boolean alreadySortedByAscend) {
+    public List<ProductDTO> getOrderedProductsFromDataBase(String sortBy, Boolean alreadySortedByAscend) {
 
         if (alreadySortedByAscend) {
             return productRepository.findAll(Sort.by(Sort.Direction.DESC, sortBy))
@@ -52,12 +52,14 @@ public class ProductService {
     }
 
     public List<ProductDTO> getFilteredProductsFromDataBase(List<FilterDTO> filterDTO) {
-       return productRepository.findAll(ProductSpecification.columnEqual(filterDTO))
-               .stream().map((product) -> new ProductDTO(
-                       product.getArticleNumber(),
-                       product.getName(),
-                       product.getNetCost(),
-                       product.getVAT()
-               )).toList();
+        return productRepository.findAll(ProductSpecification.columnEqual(filterDTO))
+                .stream().map((product) -> new ProductDTO(
+                        product.getArticleNumber(),
+                        product.getName(),
+                        product.getNetCost(),
+                        product.getVAT()
+                )).toList();
     }
+
 }
+

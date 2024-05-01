@@ -20,3 +20,8 @@
 .btn  {
     margin-top : 20px;
 }
+
+.alert {
+    position: absolute;
+    bottom: 0;
+}
