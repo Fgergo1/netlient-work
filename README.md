@@ -43,4 +43,10 @@ parancsot
    ```
 -al lehet futtatni
 
+### Egyéb infó
+
+Egy felhasználó lesz a DB-ben  és a felhasználónév és a jelszó is ugyan az : test
+
+Az oldalon a rendezés a termékek nevére való kattintással valósítható meg.
+
 Köszönöm a türelmeteket és ha bármi adódna szóljatok!:)
