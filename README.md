@@ -45,7 +45,7 @@ parancsot
 
 ### Egyéb infó
 
-Egy felhasználó lesz a DB-ben  és a felhasználónév és a jelszó is ugyan az : test
+Egy felhasználó lesz a DB-ben  és a felhasználónév és a jelszó is ugyanaz : test
 
 Az oldalon a rendezés a termékek nevére való kattintással valósítható meg.
 
