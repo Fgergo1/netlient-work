@@ -37,7 +37,7 @@ parancsot
    npm run dev
    ```
 -vel lehet futtatni
-2A bakcend-et a `/backend` mappában a
+2. A backend-et a `/backend` mappában a
 ```sh
    mvn spring-boot:run
    ```
